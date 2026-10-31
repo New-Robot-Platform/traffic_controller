@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Bazel: Build",
+            "type": "shell",
+            "command": "bazel build //...",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Bazel: Build Debug",
+            "type": "shell",
+            "command": "bazel build --config=debug //src:main",
+            "problemMatcher": []
+        },
+        {
+            "label": "Bazel: Run",
+            "type": "shell",
+            "command": "bazel run //src:main",
+            "problemMatcher": []
+        },
+        {
+            "label": "Bazel: Test",
+            "type": "shell",
+            "command": "bazel test //...",
+            "group": "test",
+            "problemMatcher": []
+        }
+    ]
+}
