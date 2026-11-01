@@ -1,0 +1,34 @@
+{
+  "features": {
+    "ghcr.io/devcontainer-community/devcontainer-features/apt-build-essential:1": {
+      "version": "1.0.2",
+      "resolved": "ghcr.io/devcontainer-community/devcontainer-features/apt-build-essential@sha256:e396b09fdd04aef5ca8d35b9957547142761575575513d12fd8dc3c98c1728f8",
+      "integrity": "sha256:e396b09fdd04aef5ca8d35b9957547142761575575513d12fd8dc3c98c1728f8"
+    },
+    "ghcr.io/devcontainer-community/devcontainer-features/clang-format:1": {
+      "version": "1.0.2",
+      "resolved": "ghcr.io/devcontainer-community/devcontainer-features/clang-format@sha256:fd4a701f3d067e74caa5e8e229eaf13e45e85385dcac5ad81401c4e7678b735e",
+      "integrity": "sha256:fd4a701f3d067e74caa5e8e229eaf13e45e85385dcac5ad81401c4e7678b735e"
+    },
+    "ghcr.io/devcontainer-community/devcontainer-features/clang-tidy:1": {
+      "version": "1.0.2",
+      "resolved": "ghcr.io/devcontainer-community/devcontainer-features/clang-tidy@sha256:e120a41ca26d1638ffd5407a1c27cd75ee1b79c9bce1b7f17ede2fa20bc6d5b5",
+      "integrity": "sha256:e120a41ca26d1638ffd5407a1c27cd75ee1b79c9bce1b7f17ede2fa20bc6d5b5"
+    },
+    "ghcr.io/devcontainer-community/devcontainer-features/cmake.org:1": {
+      "version": "1.0.2",
+      "resolved": "ghcr.io/devcontainer-community/devcontainer-features/cmake.org@sha256:3f498a612eb69d006535cbe49bc7344108a7106e116cc85123d5e7bfcbe79a6e",
+      "integrity": "sha256:3f498a612eb69d006535cbe49bc7344108a7106e116cc85123d5e7bfcbe79a6e"
+    },
+    "ghcr.io/devcontainer-community/devcontainer-features/sourceware.org-gdb:1": {
+      "version": "1.0.2",
+      "resolved": "ghcr.io/devcontainer-community/devcontainer-features/sourceware.org-gdb@sha256:c6db6642afafecd431b655dad060e3b3998a46884473cb2a21bf867d4bd30528",
+      "integrity": "sha256:c6db6642afafecd431b655dad060e3b3998a46884473cb2a21bf867d4bd30528"
+    },
+    "ghcr.io/devcontainers-community/features/bazel:1": {
+      "version": "1.2.2",
+      "resolved": "ghcr.io/devcontainers-community/features/bazel@sha256:587cd6cdd290cfb98c9ba8605a8a27f24fc1e9c736cdd03da099385863386331",
+      "integrity": "sha256:587cd6cdd290cfb98c9ba8605a8a27f24fc1e9c736cdd03da099385863386331"
+    }
+  }
+}

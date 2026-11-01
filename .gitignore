@@ -1,0 +1,19 @@
+# --- Bazel Build Artifacts & Symlinks ---
+bazel-*
+
+# Bazel cache & generated files
+.bazelrc.user
+
+# --- VS Code & IDE ---
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+# !.vscode/settings.json
+
+# --- OS / System files ---
+.DS_Store
+Thumbs.db
+
+# --- Devcontainer ---
+# Lock 파일은 필요에 따라 커밋할 수 있으나, 빌드 캐시나 로컬 변경사항을 제외할 때 사용합니다.
+# .devcontainer/devcontainer-lock.json

@@ -1,0 +1,29 @@
+{
+    "name": "Bazel C++ DevContainer",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+        "ghcr.io/devcontainers-community/features/bazel:1": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/apt-build-essential:1": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/cmake.org:1": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/clang-format:1": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/clang-tidy:1": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/sourceware.org-gdb:1": {}
+    },
+    "runArgs": [
+        "--security-opt",
+        "label=disable",
+        "--userns=host",
+        "--hostname=cpp-bazel-dev"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-extension-pack"
+            ],
+            "settings": {
+                "editor.formatOnSave": true
+            }
+        }
+    }
+}
