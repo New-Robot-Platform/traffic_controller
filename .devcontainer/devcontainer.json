@@ -1,6 +1,8 @@
 {
     "name": "Bazel C++ DevContainer",
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
     "features": {
         "ghcr.io/devcontainers-community/features/bazel:1": {},
         "ghcr.io/devcontainer-community/devcontainer-features/apt-build-essential:1": {},
