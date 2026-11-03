@@ -41,5 +41,6 @@
         "client"
     ],
     "workspaceFolder": "/workspaces/traffic_controller",
-    "postStartCommand": "sh .devcontainer/setup-intellisense.sh"
+    "postStartCommand": "sh .devcontainer/setup-intellisense.sh",
+    "waitFor": "postStartCommand"
 }
