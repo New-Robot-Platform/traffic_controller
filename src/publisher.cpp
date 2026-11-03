@@ -1,5 +1,6 @@
 #include <atomic>
 #include <cstring>
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <thread>
@@ -81,7 +82,8 @@ class delivery_action_listener : public action_listener
 
 int main()
 {
-    string serverURI = DFLT_SERVER_URI;
+    const char* configuredURI = std::getenv("MQTT_BROKER_URI");
+    string serverURI = configuredURI ? configuredURI : DFLT_SERVER_URI;
     string clientID = CLIENT_ID;
     mqtt::async_client client(serverURI, clientID, PERSIST_DIR);
 

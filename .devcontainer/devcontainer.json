@@ -1,8 +1,5 @@
 {
     "name": "Bazel C++ DevContainer",
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
     "features": {
         "ghcr.io/devcontainers-community/features/bazel:1": {},
         "ghcr.io/devcontainer-community/devcontainer-features/apt-build-essential:1": {},
@@ -11,12 +8,6 @@
         "ghcr.io/devcontainer-community/devcontainer-features/clang-tidy:1": {},
         "ghcr.io/devcontainer-community/devcontainer-features/sourceware.org-gdb:1": {}
     },
-    "runArgs": [
-        "--security-opt",
-        "label=disable",
-        "--userns=host",
-        "--hostname=cpp-bazel-dev"
-    ],
     "customizations": {
         "vscode": {
             "extensions": [
@@ -24,8 +15,32 @@
                 "ms-vscode.cpptools-extension-pack"
             ],
             "settings": {
-                "editor.formatOnSave": true
+                "editor.formatOnSave": true,
+                "C_Cpp.default.compilerPath": "/usr/bin/g++",
+                "C_Cpp.default.cStandard": "c17",
+                "C_Cpp.default.cppStandard": "c++20",
+                "C_Cpp.default.includePath": [
+                    "${workspaceFolder}/src",
+                    "${workspaceFolder}/.vscode/asio-include"
+                ],
+                "C_Cpp.default.defines": [
+                    "ASIO_STANDALONE"
+                ]
             }
         }
-    }
+    },
+    "dockerComposeFile": [
+        "../compose.yaml",
+        "compose.yaml"
+    ],
+    "service": "devcontainer",
+    "runServices": [
+        "devcontainer",
+        "mosquitto",
+        "controller",
+        "client"
+    ],
+    "workspaceFolder": "/workspaces/traffic_controller",
+    "postStartCommand": "sh .devcontainer/setup-intellisense.sh",
+    "waitFor": "postStartCommand"
 }
