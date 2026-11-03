@@ -7,6 +7,9 @@ cc_binary(
         "-lpaho-mqttpp3",
         "-lpaho-mqtt3as",
     ],
+    deps = [
+        "@asio",
+    ],
 )
 
 cc_binary(
@@ -24,5 +27,8 @@ cc_binary(
     linkopts = [
         "-lpaho-mqtt3as",
         "-lpaho-mqttpp3",
+    ],
+    deps = [
+        "@asio",
     ],
 )
