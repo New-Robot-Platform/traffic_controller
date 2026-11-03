@@ -1,8 +1,5 @@
 {
     "name": "Bazel C++ DevContainer",
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
     "features": {
         "ghcr.io/devcontainers-community/features/bazel:1": {},
         "ghcr.io/devcontainer-community/devcontainer-features/apt-build-essential:1": {},
@@ -11,12 +8,6 @@
         "ghcr.io/devcontainer-community/devcontainer-features/clang-tidy:1": {},
         "ghcr.io/devcontainer-community/devcontainer-features/sourceware.org-gdb:1": {}
     },
-    "runArgs": [
-        "--security-opt",
-        "label=disable",
-        "--userns=host",
-        "--hostname=cpp-bazel-dev"
-    ],
     "customizations": {
         "vscode": {
             "extensions": [
@@ -27,5 +18,17 @@
                 "editor.formatOnSave": true
             }
         }
-    }
+    },
+    "dockerComposeFile": [
+        "../compose.yaml",
+        "compose.yaml"
+    ],
+    "service": "devcontainer",
+    "runServices": [
+        "devcontainer",
+        "mosquitto",
+        "controller",
+        "client"
+    ],
+    "workspaceFolder": "/workspaces/traffic_controller"
 }

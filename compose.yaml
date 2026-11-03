@@ -1,0 +1,40 @@
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2
+    ports:
+      - "127.0.0.1:1883:1883"
+    volumes:
+      - ./docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mosquitto_pub -h localhost -t healthcheck -m ok"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+  controller:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: docker/controller/Dockerfile
+    environment:
+      MQTT_BROKER_URI: tcp://mosquitto:1883
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "test", "-f", "/tmp/mqtt-subscribed"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+    restart: unless-stopped
+
+  client:
+    build:
+      context: .
+      dockerfile: docker/client/Dockerfile
+    environment:
+      MQTT_BROKER_URI: tcp://mosquitto:1883
+    depends_on:
+      controller:
+        condition: service_healthy
+    restart: on-failure
