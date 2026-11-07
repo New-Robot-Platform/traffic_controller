@@ -1,0 +1,18 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: docker/controller/Dockerfile
+      target: build
+    volumes:
+      - .:/workspaces/traffic_controller:cached
+    environment:
+      MQTT_BROKER_URI: tcp://mosquitto:1883
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    command: sleep infinity
+    security_opt:
+      - label=disable
+    userns_mode: host
+    hostname: cpp-bazel-dev

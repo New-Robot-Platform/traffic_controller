@@ -1,4 +1,7 @@
 
+#include <cstdio>
+#include <cstdlib>
+#include <fstream>
 #include <iostream>
 #include <string>
 
@@ -30,6 +33,7 @@ class action_listener : public virtual mqtt::iaction_listener
 
     void on_success(const mqtt::token& tok) override
     {
+        if (name == "Subscription") std::ofstream("/tmp/mqtt-subscribed") << "ready\n";
         cout << name << " success";
         if (tok.get_message_id() != 0)
             cout << " for token: [" << tok.get_message_id() << "]" << std::endl;
@@ -46,7 +50,7 @@ class action_listener : public virtual mqtt::iaction_listener
 
 class callback : public virtual mqtt::callback, public virtual mqtt::iaction_listener
 {
-    int retry;
+    int retry = 0;
     mqtt::async_client& cli;
     mqtt::connect_options& connOpts;
 
@@ -91,6 +95,7 @@ class callback : public virtual mqtt::callback, public virtual mqtt::iaction_lis
 
     void connection_lost(const string& cause) override
     {
+        std::remove("/tmp/mqtt-subscribed");
         cout << "\nConnection Lost" << std::endl;
         if (!cause.empty()) std::cout << "\tcause: " << cause << std::endl;
 
@@ -118,15 +123,15 @@ class callback : public virtual mqtt::callback, public virtual mqtt::iaction_lis
 
 int main(int argc, char** argv)
 {
-    mqtt::async_client client(DFLT_ADDRESS, "client_robot");
-
-    mqtt::token_ptr a = client.connect();
+    std::remove("/tmp/mqtt-subscribed");
+    const char* configuredURI = std::getenv("MQTT_BROKER_URI");
+    const std::string address = configuredURI ? configuredURI : DFLT_ADDRESS;
+    mqtt::async_client client(address, "client_robot");
 
     mqtt::connect_options conOps = mqtt::connect_options_builder()
                                        .user_name("user")
                                        .password("passwd")
                                        .keep_alive_interval(seconds(30))
-                                       .automatic_reconnect(seconds(2), seconds(30))
                                        .clean_session(false)
                                        .finalize();
 
@@ -135,7 +140,7 @@ int main(int argc, char** argv)
 
     try
     {
-        cout << "Connection to MQTT broker at '" << DFLT_ADDRESS << "'..." << endl;
+        cout << "Connection to MQTT broker at '" << address << "'..." << endl;
         client.connect(conOps, nullptr, cb);
     }
     catch (mqtt::exception& e)
