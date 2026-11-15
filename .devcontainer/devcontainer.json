@@ -6,6 +6,9 @@
         "HOME": "/home/vscode"
     },
     "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installPackages": "clangd"
+        },
         "ghcr.io/devcontainers-community/features/bazel:1": {},
         "ghcr.io/devcontainer-community/devcontainer-features/apt-build-essential:1": {},
         "ghcr.io/devcontainer-community/devcontainer-features/cmake.org:1": {},
@@ -16,12 +19,21 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-vscode.cpptools",
-                "ms-vscode.cpptools-extension-pack"
+                "llvm-vs-code-extensions.vscode-clangd",
+                "ms-vscode.cpptools"
             ],
             "settings": {
-                "editor.formatOnSave": true
+                "editor.formatOnSave": true,
+                "clangd.path": "/usr/bin/clangd",
+                "clangd.arguments": [
+                    "--background-index",
+                    "--clang-tidy",
+                    "--completion-style=detailed",
+                    "--header-insertion=never"
+                ],
+                "C_Cpp.intelliSenseEngine": "disabled"
             }
         }
-    }
+    },
+    "postCreateCommand": "bazel run @hedron_compile_commands//:refresh_all"
 }
