@@ -1,6 +1,14 @@
 {
-    "name": "Bazel C++ DevContainer",
+    "name": "Traffic Controller",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "remoteUser": "vscode",
+    "containerEnv": {
+        "HOME": "/home/vscode"
+    },
     "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installPackages": "clangd"
+        },
         "ghcr.io/devcontainers-community/features/bazel:1": {},
         "ghcr.io/devcontainer-community/devcontainer-features/apt-build-essential:1": {},
         "ghcr.io/devcontainer-community/devcontainer-features/cmake.org:1": {},
@@ -11,36 +19,21 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-vscode.cpptools",
-                "ms-vscode.cpptools-extension-pack"
+                "llvm-vs-code-extensions.vscode-clangd",
+                "ms-vscode.cpptools"
             ],
             "settings": {
                 "editor.formatOnSave": true,
-                "C_Cpp.default.compilerPath": "/usr/bin/g++",
-                "C_Cpp.default.cStandard": "c17",
-                "C_Cpp.default.cppStandard": "c++20",
-                "C_Cpp.default.includePath": [
-                    "${workspaceFolder}/src",
-                    "${workspaceFolder}/.vscode/asio-include"
+                "clangd.path": "/usr/bin/clangd",
+                "clangd.arguments": [
+                    "--background-index",
+                    "--clang-tidy",
+                    "--completion-style=detailed",
+                    "--header-insertion=never"
                 ],
-                "C_Cpp.default.defines": [
-                    "ASIO_STANDALONE"
-                ]
+                "C_Cpp.intelliSenseEngine": "disabled"
             }
         }
     },
-    "dockerComposeFile": [
-        "../compose.yaml",
-        "compose.yaml"
-    ],
-    "service": "devcontainer",
-    "runServices": [
-        "devcontainer",
-        "mosquitto",
-        "controller",
-        "client"
-    ],
-    "workspaceFolder": "/workspaces/traffic_controller",
-    "postStartCommand": "sh .devcontainer/setup-intellisense.sh",
-    "waitFor": "postStartCommand"
+    "postCreateCommand": "bazel run @hedron_compile_commands//:refresh_all"
 }
