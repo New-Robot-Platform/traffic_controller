@@ -15,32 +15,8 @@
                 "ms-vscode.cpptools-extension-pack"
             ],
             "settings": {
-                "editor.formatOnSave": true,
-                "C_Cpp.default.compilerPath": "/usr/bin/g++",
-                "C_Cpp.default.cStandard": "c17",
-                "C_Cpp.default.cppStandard": "c++20",
-                "C_Cpp.default.includePath": [
-                    "${workspaceFolder}/src",
-                    "${workspaceFolder}/.vscode/asio-include"
-                ],
-                "C_Cpp.default.defines": [
-                    "ASIO_STANDALONE"
-                ]
+                "editor.formatOnSave": true
             }
         }
-    },
-    "dockerComposeFile": [
-        "../compose.yaml",
-        "compose.yaml"
-    ],
-    "service": "devcontainer",
-    "runServices": [
-        "devcontainer",
-        "mosquitto",
-        "controller",
-        "client"
-    ],
-    "workspaceFolder": "/workspaces/traffic_controller",
-    "postStartCommand": "sh .devcontainer/setup-intellisense.sh",
-    "waitFor": "postStartCommand"
+    }
 }
