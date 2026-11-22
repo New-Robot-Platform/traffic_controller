@@ -15,5 +15,8 @@ bazel-*
 Thumbs.db
 
 # --- Devcontainer ---
-# Lock 파일은 필요에 따라 커밋할 수 있으나, 빌드 캐시나 로컬 변경사항을 제외할 때 사용합니다.
-# .devcontainer/devcontainer-lock.json
+.devcontainer/devcontainer-lock.json
+
+# --- clangd ---
+compile_commands.json
+.cache/clangd/
